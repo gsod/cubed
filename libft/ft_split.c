@@ -3,87 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 21:15:38 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/14 22:37:01 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:16:11 by mlongo            #+#    #+#             */
+/*   Updated: 2023/11/10 17:15:49 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*do_copy(char *str, char const *s, size_t len, int *flag)
+static size_t	get_word(const char *s, char c)
 {
-	*flag = 0;
-	str = malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, (char *)s, len + 1);
-	return (str);
-}
+	size_t	words;
 
-static void	do_split(char **str, char const *s, char c, size_t len)
-{
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	int		flag;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	flag = 0;
-	while (k < len)
+	words = 0;
+	while (*s)
 	{
-		if (s[j] != c && flag == 0)
+		if (*s != c && !(*s >= '\t' && c <= '\r'))
 		{
-			i = j;
-			flag = 1;
+			++words;
+			while (*s && *s != c)
+				++s;
 		}
-		if ((s[j] == c || s[j] == 0) && flag == 1)
-		{
-			str[k] = do_copy(str[k], &s[i], j - i, &flag);
-			k++;
-		}
-		j++;
+		else
+			s++;
 	}
+	return (words);
 }
 
-static size_t	count_strs(char const *s, char c)
+void	skip_quotes(char **s, size_t *len)
 {
-	size_t	i;
-	size_t	j;
-	int		flag;
-
-	i = 0;
-	j = 0;
-	flag = 0;
-	while (s[j] != 0)
+	if (**s == '"')
 	{
-		if (s[j] != c && flag == 0)
+		(*s)++;
+		(*len)++;
+		while (**s && **s != '"')
 		{
-			i++;
-			flag = 1;
+			(*len)++;
+			(*s)++;
 		}
-		if (s[j] == c)
-			flag = 0;
-		j++;
 	}
-	return (i);
+	else if (**s == '\'')
+	{
+		(*s)++;
+		(*len)++;
+		while (**s && **s != '\'')
+		{
+			(*len)++;
+			(*s)++;
+		}
+	}
+	++(*s);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**str;
+	size_t	i;
 	size_t	len;
 
-	len = count_strs(s, c);
-	str = malloc((len + 1) * sizeof(char *));
-	str[len] = NULL;
+	if (!s)
+		return (0);
+	i = 0;
+	str = malloc(sizeof(char *) * (get_word(s, c) + 1));
 	if (!str)
-		return (NULL);
-	if (len == 0)
-		return (str);
-	do_split(str, s, c, len);
+		return (0);
+	while (*s)
+	{
+		if (*s != c && !(*s >= '\t' && c <= '\r'))
+		{
+			len = 0;
+			while (*s && *s != c && !(*s >= '\t' && c <= '\r') && ++len)
+				skip_quotes(&s, &len);
+			str[i++] = ft_substr(s - len, 0, len);
+		}
+		else
+			s++;
+	}
+	str[i] = 0;
 	return (str);
 }

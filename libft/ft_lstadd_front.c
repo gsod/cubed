@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:57:19 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/16 05:07:17 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/05 11:04:08 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/05 17:27:27 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst)
-	{
-		if (*lst)
-			new->next = *lst;
-		*lst = new;
-	}
+	if (lst == NULL || new == NULL)
+		return ;
+	new->next = lst[0];
+	lst[0] = new;
 }

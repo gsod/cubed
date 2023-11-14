@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 19:13:56 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/13 19:21:18 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:15:46 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:15:48 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	ft_putstr_fd(s, fd);
-	write (fd, "\n", 1);
+	ft_putchar_fd('\n', fd);
 }

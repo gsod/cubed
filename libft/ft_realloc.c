@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lnicoter <lnicoter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 19:17:31 by mlongo            #+#    #+#             */
-/*   Updated: 2023/04/04 19:17:32 by mlongo           ###   ########.fr       */
+/*   Created: 2023/11/01 10:30:26 by lnicoter          #+#    #+#             */
+/*   Updated: 2023/11/01 10:45:52 by lnicoter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	*ft_realloc(void *p, size_t size, int dim, int new_dim)
 {
-	char			*res;
-	unsigned int	i;
+	char		*new_p;
+	size_t		i;
 
+	new_p = (char *)malloc(size * new_dim);
+	if (!new_p)
+		return (NULL);
 	i = 0;
-	if (!s || !f)
-		return (NULL);
-	res = (char *) malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (res == NULL)
-		return (NULL);
-	while (s[i])
+	while (i < size * new_dim)
 	{
-		res[i] = (char) f(i, s[i]);
+		if (i < size * dim)
+			new_p[i] = ((char *) p)[i];
+		else
+			new_p[i] = 0;
 		i++;
 	}
-	res[i] = 0;
-	return (res);
+	free(p);
+	return ((void *) new_p);
 }

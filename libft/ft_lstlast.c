@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 21:33:47 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/16 05:07:46 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/05 12:58:22 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/05 13:47:56 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst)
-	{
-		if (!lst->next)
-			return (lst);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
 		lst = lst->next;
-	}
 	return (lst);
 }

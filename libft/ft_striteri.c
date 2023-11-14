@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 22:38:06 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/14 22:41:20 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:16:57 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:16:58 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
+	if (!s || !f)
+		return ;
 	i = 0;
-	while (s[i] != 0)
+	while (s[i])
 	{
-		(*f)(i, &s[i]);
+		f(i, s + i);
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:46:52 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/12 14:59:27 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:13:11 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/05 11:00:52 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,5 @@
 
 int	ft_isascii(int c)
 {
-	char	ch;
-
-	ch = (char) c;
-	if (ch >= 0 && ch <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

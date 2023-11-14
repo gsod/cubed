@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   digit2.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: alessiolongo <alessiolongo@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 18:54:42 by dforte            #+#    #+#             */
-/*   Updated: 2022/02/05 15:02:07 by dforte           ###   ########.fr       */
+/*   Created: 2023/08/20 12:04:32 by alessiolong       #+#    #+#             */
+/*   Updated: 2023/08/20 12:06:43 by alessiolong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnnbr(char *nbr, t_flags flag, int *count, int nb)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_uint	i;
+	size_t	i;
 
-	i = 1;
-	*count += 1;
-	if (flag.minus == 1 && flag.nsign == -1)
-		write (1, "-", 1);
-	print_zero(flag, nb, count);
-	putnstr(&nbr[i], (int)ft_strlen(nbr) - 1, count);
+	if (!s1 || !s2)
+		return (1);
+	i = 0;
+	while (1)
+	{
+		if (s1[i] == '\0' || s2[i] == '\0'
+			|| s1[i] != s2[i])
+			break ;
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

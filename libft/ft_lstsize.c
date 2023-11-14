@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 18:57:12 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/16 05:08:15 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/05 11:31:07 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/05 12:42:42 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	ft_lstsize(t_list *lst)
 {
 	int	i;
 
-	i = 0;
-	while (lst)
+	i = 1;
+	if (!lst)
+		return (0);
+	while (lst->next)
 	{
 		lst = lst->next;
 		i++;

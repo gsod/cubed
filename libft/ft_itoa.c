@@ -3,88 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/13 19:28:23 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/14 22:48:46 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:14:20 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:14:22 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*num(int n)
+static char	*get_malloc(int n, int cont, int *i)
 {
-	char	*num;
+	char	*str;
 
-	if (n == -2147483648)
+	if (n >= 0)
 	{
-		num = ft_calloc(12, sizeof(char));
-		num[0] = '-';
-		num[1] = '2';
-		num[2] = '1';
-		num[3] = '4';
-		num[4] = '7';
-		num[5] = '4';
-		num[6] = '8';
-		num[7] = '3';
-		num[8] = '6';
-		num[9] = '4';
-		num[10] = '8';
+		str = (char *)malloc(cont + 1);
+		if (str == NULL)
+			return (NULL);
 	}
 	else
 	{
-		num = ft_calloc(2, sizeof(char));
-		num[0] = '0';
+		str = (char *)malloc(cont + 2);
+		if (str == NULL)
+			return (NULL);
+		str[*i] = '-';
+		*i = *i + 1;
 	}
-	if (!num)
-		return (NULL);
-	return (num);
+	return (str);
 }
 
-static int	ft_abs(int n)
+static char	*fill_array(char *str, int n, int *i)
 {
-	if (n < 0)
-		return (-n);
-	return (n);
-}
-
-static size_t	get_len(int n)
-{
-	size_t	i;
-
-	i = 0;
-	while (n > 0)
+	if (n == -2147483648)
 	{
-		i++;
-		n /= 10;
+		str[*i] = '2';
+		*i = *i + 1;
+		n = 147483648;
 	}
-	return (i);
+	if (n > 9 || n < -9)
+	{
+		fill_array(str, n / 10, i);
+		fill_array(str, n % 10, i);
+	}
+	else
+	{
+		if (n < 0)
+			str[*i] = -n + 48;
+		else
+			str[*i] = n + 48;
+		*i = *i + 1;
+	}
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*nm;
-	size_t	len;
+	int		i;
+	int		nbr;
+	char	*str;
+	int		cont;
 
-	len = get_len(ft_abs(n));
-	if (n == -2147483648 || n == 0)
-		return (num(n));
-	if (n < 0)
-	{
-		nm = ft_calloc(len + 2, sizeof(char));
-		n *= -1;
-		nm[0] = 45;
-		len++;
-	}
+	i = 0;
+	nbr = n;
+	cont = 1;
+	if (n == -2147483648)
+		cont = 10;
 	else
-		nm = ft_calloc(len + 1, sizeof(char));
-	if (!nm)
-		return (NULL);
-	while (n > 0)
 	{
-		nm[len - 1] = n % 10 + '0';
-		len--;
-		n /= 10;
+		while (nbr > 9 || nbr < -9)
+		{
+			nbr = nbr / 10;
+			cont++;
+		}
 	}
-	return (nm);
+	str = get_malloc(n, cont, &i);
+	if (str == NULL)
+		return (NULL);
+	str = fill_array(str, n, &i);
+	str[i] = 0;
+	return (str);
 }

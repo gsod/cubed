@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:48:50 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/12 16:36:45 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:18:22 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:18:24 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_toupper(int ch)
+static int	ft_islower(int c)
 {
-	if (ch >= 97 && ch <= 122)
-		ch -= 32;
-	return (ch);
+	return (c >= 'a' && c <= 'z');
+}
+
+int	ft_toupper(int c)
+{
+	if (ft_islower(c))
+		return (c - 32);
+	return (c);
 }

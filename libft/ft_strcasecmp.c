@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strcasecmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 19:17:09 by mlongo            #+#    #+#             */
-/*   Updated: 2023/04/04 19:17:12 by mlongo           ###   ########.fr       */
+/*   Created: 2023/11/08 17:15:53 by abuonomo          #+#    #+#             */
+/*   Updated: 2023/11/08 17:48:51 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+int	ft_strcasecmp(const char *str1, const char *str2)
 {
-	int		lenght;
-	size_t	dstlen;
-	size_t	i;
-
-	if (size == 0)
-		return (ft_strlen(src));
-	lenght = ft_strlen(src) + ft_strlen(dst);
-	dstlen = ft_strlen(dst);
-	i = 0;
-	while (src[i] && i + dstlen < size - 1)
+	while (*str1 && *str2)
 	{
-		dst[i + dstlen] = src[i];
-		i++;
+		if (ft_tolower(*str1) != ft_tolower(*str2))
+		{
+			return (ft_tolower(*str1) - ft_tolower(*str2));
+		}
+		str1++;
+		str2++;
 	}
-	if (dstlen < size)
-		dst[i + dstlen] = 0;
-	else
-		return (ft_strlen(src) + size);
-	return (lenght);
+	return (ft_tolower(*str1) - ft_tolower(*str2));
 }

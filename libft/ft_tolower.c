@@ -3,18 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:48:46 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/12 16:37:27 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:18:14 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:18:16 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int ch)
+static int	ft_isupper(int c)
 {
-	if (ch >= 65 && ch <= 90)
-		ch += 32;
-	return (ch);
+	return (c >= 'A' && c <= 'Z');
+}
+
+int	ft_tolower(int c)
+{
+	if (ft_isupper(c))
+		return (c + 32);
+	return (c);
 }

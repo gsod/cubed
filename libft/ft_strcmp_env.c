@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   uint2.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 18:57:32 by dforte            #+#    #+#             */
-/*   Updated: 2022/02/05 15:04:00 by dforte           ###   ########.fr       */
+/*   Created: 2023/11/08 16:36:48 by mlongo            #+#    #+#             */
+/*   Updated: 2023/11/08 16:37:11 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_uputnnbr(char *nbr, t_flags flag, int *count, t_uint nb)
+int	ft_strcmp_env(const char *input, const char *env)
 {
-	t_uint	i;
-
-	i = 1;
-	*count += 1;
-	print_uzero(flag, nb, count);
-	putnstr(&nbr[i], (int)ft_strlen(nbr) - 1, count);
+	while (*env != '=' && (*input != ' ' || *input != '$'))
+	{
+		if (*input != *env)
+			return (1);
+		input++;
+		env++;
+	}
+	return (*env != '=' || *input != '\0');
 }

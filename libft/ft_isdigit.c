@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/12 14:46:58 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/12 14:59:33 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:13:36 by mlongo            #+#    #+#             */
+/*   Updated: 2023/04/04 19:13:46 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	char	ch;
-
-	ch = (char) c;
-	if (ch >= 48 && ch <= 57)
-		return (1);
-	return (0);
+	return (c >= '0' && c <= '9');
 }

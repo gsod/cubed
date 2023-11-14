@@ -3,62 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dforte <dforte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlongo <mlongo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/10 21:51:26 by dforte            #+#    #+#             */
-/*   Updated: 2022/01/11 18:27:31 by dforte           ###   ########.fr       */
+/*   Created: 2023/04/04 19:12:16 by mlongo            #+#    #+#             */
+/*   Updated: 2023/08/07 14:52:46 by mlongo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_space(char str)
+static int	ft_sign(char c)
 {
-	if ((str >= 9 && str <= 13) || str == 32)
-		return (1);
-	return (0);
+	return (c == '-' || c == '+');
 }
 
-static void	calc_sign(const char *str, int *i, int *sign)
+static int	ft_spaces(char c)
 {
-	if (str[*i] == 43)
-	{
-		*i += 1;
-		return ;
-	}
-	if (str[*i] == 45)
-	{
-		*sign *= -1;
-		*i += 1;
-	}
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\r'
+		|| c == '\v' || c == '\f');
 }
 
-static void	get_int(const char *str, int j, int sign, int *nb)
+int	ft_atoi(const char *nptr)
 {
-	int	a;
+	char	*p;
+	int		s;
+	int		r;
 
-	*nb = 0;
-	while (str[j] >= 48 && str[j] <= 57)
+	p = (char *) nptr;
+	s = 1;
+	r = 0;
+	while (ft_spaces(*p))
+		p++;
+	if (ft_sign(*p))
 	{
-		a = (str[j] - '0') * sign;
-		*nb = *nb * 10 + a;
-		j++;
+		if (*p == '-')
+			s = -1;
+		p++;
 	}
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	nb;
-
-	sign = 1;
-	i = 0;
-	if (str[0] == 0)
-		return (0);
-	while (is_space(str[i]))
-		i++;
-	calc_sign(&str[0], &i, &sign);
-	get_int(&str[0], i, sign, &nb);
-	return (nb);
+	while (ft_isdigit((int) *p))
+	{
+		r *= 10;
+		r += *(p++) - 48;
+	}
+	return (r * s);
 }
