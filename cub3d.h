@@ -24,6 +24,8 @@
 #define WIN_WIDTH 1280.0
 #define WIN_HEIGHT 720.0
 
+# define RAD 0.0174533
+
 # define ESC 65307
 # define W 119
 # define A 97
@@ -36,6 +38,13 @@
 
 int keys(int keycode, t_cub3d *cub3d);
 
+typedef struct s_player
+{
+	float ascisse_x;
+	float ordinate_y;
+	float pov;
+}	t_player;
+
 typedef struct s_cub3d
 {
     int	w;
@@ -44,6 +53,13 @@ typedef struct s_cub3d
 	int d;
 	int	t_right;
 	int t_left;
+
+	int	orientation[(int) WIN_WIDTH];
+	char **map;
+	float wall_height;
+	float radius_dim;
+	
+	t_player player;	
 }            t_cub3d;
 
 #endif
