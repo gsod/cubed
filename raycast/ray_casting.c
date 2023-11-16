@@ -65,14 +65,48 @@ void	ft_orientation(t_cub3d *cub3d, float angle, float dist, int i)
 	ascisse_x = cub3d->player.ascisse_x + dist * cos_value + 0.01;
 	ordinate_y = cub3d->player.ordinate_y + dist * sin_value;
 	if (cub3d->map[(int)(ordinate_y - 0.01)][(int)ascisse_x] == '1')
-		cub3d->orientation[i] = 0;
+		cub3d->orientation[i] = NO; // nord
 	else if (cub3d->map[(int)(ordinate_y + 0.01)][(int)ascisse_x] == '1')
-		cub3d->orientation[i] = 1;
+		cub3d->orientation[i] = SO; // sud
 	else if (cub3d->map[(int)ordinate_y][(int)(ascisse_x - 0.01)] == '1')
-		cub3d->orientation[i] = 2;
+		cub3d->orientation[i] = EA; // est
 	else
-		cub3d->orientation[i] = 3;
+		cub3d->orientation[i] = WE; // ovest
 }
 
 //L'orientamento viene assegnato a cub3d->orientation[i].
 // (quindi se il muro è a nord, sud, est o ovest)
+
+void ft_draw(t_cub3d *cub3d)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	color;
+
+	i = 0;
+	while (i < WIN_WIDTH)
+	{
+		j = 0;
+		while (j < WIN_HEIGHT)
+		{
+			if (j < (WIN_HEIGHT / 2) - (cub3d->wall_height / 2))
+				color = cub3d->ceiling.r << 16 | cub3d->ceiling.g << 8 | \
+				cub3d->ceiling.b;
+			else if (j > (WIN_HEIGHT / 2) + (cub3d->wall_height / 2))
+				color = cub3d->floor.r << 16 | cub3d->floor.g << 8 | \
+				cub3d->floor.b;
+			else
+			{
+				k = (int)((float)j / (float)WIN_HEIGHT * 64.0);
+				color = cub3d->texture[cub3d->orientation[i]][k][0] << 16 | \
+				cub3d->texture[cub3d->orientation[i]][k][1] << 8 | \
+				cub3d->texture[cub3d->orientation[i]][k][2];
+			}
+			cub3d->img.data[j * WIN_WIDTH + i] = color;
+			j++;
+		}
+		i++;
+	}
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->img.img, 0, 0);
+}

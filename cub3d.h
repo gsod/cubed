@@ -26,6 +26,11 @@
 
 # define RAD 0.0174533
 
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
+
 # define ESC 65307
 # define W 119
 # define A 97
