@@ -43,6 +43,13 @@ typedef struct s_player
 	float	pov;
 }	t_player;
 
+typedef struct s_rgb
+{
+	int		r;
+	int		g;
+	int		b;
+}	t_rgb;
+
 typedef struct s_cub3d
 {
 	int			w;
@@ -54,11 +61,16 @@ typedef struct s_cub3d
 
 	int			orientation[(int) WIN_WIDTH];
 	char		**map;
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+	t_rgb		floor;
+	t_rgb		ceiling;
 	float		wall_height;
 	float		radius_dim[(int) WIN_WIDTH];
-
 	t_player	player;
-
+	
 }	t_cub3d;
 
 int		keys(int keycode, t_cub3d *cub3d);
