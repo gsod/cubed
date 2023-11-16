@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:52:26 by abuonomo          #+#    #+#             */
-/*   Updated: 2023/11/16 19:02:09 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:27:35 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void check_parameter(int argc, char **argv, t_cub3d *cub3d)
 	while(tmp != NULL)
 	{
 		tmp	= get_next_line(fd);
+		if(is_parameter(tmp) && parameter_full(cub3d) < 4)
+			add_parameter(tmp, cub3d);
 		if(tmp == NULL)
 			break;
-		printf("%s\n", tmp);
 		free(tmp);
 	}
-	printf("arrivo");
 }
