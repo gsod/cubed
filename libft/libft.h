@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:18:28 by mlongo            #+#    #+#             */
-/*   Updated: 2023/11/16 18:18:52 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:37:01 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strjoin2(char *s1, char *s2);
 char	*ft_strtrim(char const *s1, char const *set);
-char	**ft_split(char *s, char c);
+char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
@@ -74,7 +74,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_strcmp(char *s1, char *s2);
-char	*ft_strjoin_damn_you_leaks(char *s1, char *s2);
+char	*ft_strjoin3(char *s1, char *s2);
 char	*i_hate_this_strcpy_for_apix(char *dst, char *src);
 void	*ft_realloc(void *p, size_t size, int dim, int new_dim);
 char	*ft_strcpy(char *dest, char *src);

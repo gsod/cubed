@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:17:17 by mlongo            #+#    #+#             */
-/*   Updated: 2023/11/09 15:12:33 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/17 15:03:58 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ char	*i_hate_this_strcpy_for_apix(char *dst, char *src)
 		i++;
 		j++;
 	}
-	dst = ft_strjoin_damn_you_leaks(dst, "\"");
+	dst = ft_strjoin3(dst, "\"");
 	return (dst);
 }

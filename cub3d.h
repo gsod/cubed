@@ -85,5 +85,6 @@ void	ft_orientation(t_cub3d *cub3d, float angle, float dist, int i);
 //abuonomo
 
 void check_parameter(int argc, char **argv, t_cub3d *cub3d);
-
+void check_map(char *path, t_cub3d *cub3d);
+void	ft_exit(char *str);
 #endif

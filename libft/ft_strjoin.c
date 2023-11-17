@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:17:02 by mlongo            #+#    #+#             */
-/*   Updated: 2023/11/09 15:12:59 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:47:46 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_strjoin2(char *s1, char *s2)
 	return (res);
 }
 
-char	*ft_strjoin_damn_you_leaks(char *s1, char *s2)
+char	*ft_strjoin3(char *s1, char *s2)
 {
 	char	*res;
 	size_t	i;
