@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:52:26 by abuonomo          #+#    #+#             */
-/*   Updated: 2023/11/17 11:35:09 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:29:02 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,18 @@ void check_parameter(int argc, char **argv, t_cub3d *cub3d)
 			if(is_param_not_present(tmp, cub3d))
 				add_parameter(tmp, cub3d);
 			else
-			{
-				free(tmp);
-				ft_exit("Parameter already present");
-			}
+				break;
+		}
+		else
+		{
+			if(tmp[0] != '\n' && param_full(tmp,cub3d) < 6)
+				break;
 		}
 		free(tmp);
 	}
+	if(tmp != NULL)
+		free(tmp);
 	close(fd);
 	if(param_full(tmp, cub3d) < 6)
-		ft_exit("Missing parameter");
+		ft_exit("Wrong parameter");
 }
