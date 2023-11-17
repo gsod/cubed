@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:18:28 by mlongo            #+#    #+#             */
-/*   Updated: 2023/11/09 15:13:45 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/16 18:18:52 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
 
 typedef struct s_list
 {
@@ -79,5 +82,6 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n);
 int		ft_strcmp_env(const char *input, const char *env);
 char	*ft_strcat(char *dest, char *src);
 int		ft_strcasecmp(const char *str1, const char *str2);
+char	*get_next_line(int fd);
 
 #endif

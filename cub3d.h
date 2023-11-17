@@ -75,12 +75,18 @@ typedef struct s_cub3d
 	float		wall_height;
 	float		radius_dim[(int) WIN_WIDTH];
 	t_player	player;
-	
+
 }	t_cub3d;
 
 int		keys(int keycode, t_cub3d *cub3d);
 void	ft_rad(t_cub3d *cub3d);
 void	ft_pgtowall_dist(t_cub3d *cub3d, float angle, int i);
 void	ft_orientation(t_cub3d *cub3d, float angle, float dist, int i);
+
+
+
+//abuonomo
+
+void check_parameter(int argc, char **argv, t_cub3d *cub3d);
 
 #endif
