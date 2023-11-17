@@ -19,17 +19,12 @@
 # include <fcntl.h>
 # include <math.h>
 # include "./libft/libft.h"
-# include "./minilibx-linux/mlx.h"
+
 
 # define WIN_WIDTH 1280.0
 # define WIN_HEIGHT 720.0
 
 # define RAD 0.0174533
-
-# define NO 0
-# define SO 1
-# define WE 2
-# define EA 3
 
 # define ESC 65307
 # define W 119
@@ -70,8 +65,10 @@ typedef struct s_cub3d
 	char		*SO;
 	char		*WE;
 	char		*EA;
-	t_rgb		floor;
-	t_rgb		ceiling;
+	char		*floor;
+	char		*ceiling;
+	t_rgb		floor_rgb;
+	t_rgb		ceiling_rgb;
 	float		wall_height;
 	float		radius_dim[(int) WIN_WIDTH];
 	t_player	player;
