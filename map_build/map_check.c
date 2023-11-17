@@ -6,7 +6,7 @@
 /*   By: abuonomo <abuonomo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:52:26 by abuonomo          #+#    #+#             */
-/*   Updated: 2023/11/16 19:56:12 by abuonomo         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:35:09 by abuonomo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int is_parameter(char *str)
 	|| (str[0] == 'S' && str[1] == 'O')
 	|| (str[0] == 'W' && str[1] == 'E')
 	|| (str[0] == 'E' && str[1] == 'A')
-	|| (str[0] == 'S' && str[1] == ' ')
+	|| (str[0] == 'C' && str[1] == ' ')
 	|| (str[0] == 'F' && str[1] == ' '))
 	{
 		return (1);
@@ -42,25 +42,58 @@ int is_parameter(char *str)
 	return (0);
 }
 
-int param_not_present(char *tmp, t_cub3d *cub3d)
+int param_full(char *tmp, t_cub3d *cub3d)
 {
-	if(tmp[0] == 'N' && tmp[1] == 'O' && cub3d->no == NULL)
+	int i;
+
+	i = 0;
+	if(cub3d->NO != NULL)
+		i++;
+	if(cub3d->SO != NULL)
+		i++;
+	if(cub3d->WE != NULL)
+		i++;
+	if(cub3d->EA != NULL)
+		i++;
+	if(cub3d->floor != NULL)
+		i++;
+	if(cub3d->ceiling != NULL)
+		i++;
+	return (i);
+}
+
+void	add_parameter(char *tmp, t_cub3d *cub3d)
+{
+	if(tmp[0] == 'N' && tmp[1] == 'O' && cub3d->NO == NULL)
+		cub3d->NO = ft_strtrim(ft_strdup(tmp + 2), " ");
+	if(tmp[0] == 'S' && tmp[1] == 'O' && cub3d->SO == NULL)
+		cub3d->SO = ft_strtrim(ft_strdup(tmp + 2), " ");
+	if(tmp[0] == 'W' && tmp[1] == 'E' && cub3d->WE == NULL)
+		cub3d->WE = ft_strtrim(ft_strdup(tmp + 2), " ");
+	if(tmp[0] == 'E' && tmp[1] == 'A' && cub3d->EA == NULL)
+		cub3d->EA = ft_strtrim(ft_strdup(tmp + 2), " ");
+	if(tmp[0] == 'F' && tmp[1] == ' ' && cub3d->floor == NULL)
+		cub3d->floor = ft_strtrim(ft_strdup(tmp + 2), " ");
+	if(tmp[0] == 'C' && tmp[1] == ' ' && cub3d->ceiling == NULL)
+		cub3d->ceiling = ft_strtrim(ft_strdup(tmp + 2), " ");
+}
+
+int is_param_not_present(char *tmp, t_cub3d *cub3d)
+{
+	if(tmp[0] == 'N' && tmp[1] == 'O' && cub3d->NO == NULL)
 		return (1);
-	if(tmp[0] == 'S' && tmp[1] == 'O' && cub3d->so == NULL)
+	if(tmp[0] == 'S' && tmp[1] == 'O' && cub3d->SO == NULL)
 		return (1);
-	if(tmp[0] == 'W' && tmp[1] == 'E' && cub3d->we == NULL)
+	if(tmp[0] == 'W' && tmp[1] == 'E' && cub3d->WE == NULL)
 		return (1);
-	if(tmp[0] == 'E' && tmp[1] == 'A' && cub3d->ea == NULL)
+	if(tmp[0] == 'E' && tmp[1] == 'A' && cub3d->EA == NULL)
 		return (1);
-	if(tmp[0] == 'S' && tmp[1] == ' ' && cub3d->s == NULL)
+	if(tmp[0] == 'F' && tmp[1] == ' ' && cub3d->floor == NULL)
 		return (1);
-	if(tmp[0] == 'F' && tmp[1] == ' ' && cub3d->f == NULL)
-		return (1);
-	if(tmp[0] == 'C' && tmp[1] == ' ' && cub3d->c == NULL)
+	if(tmp[0] == 'C' && tmp[1] == ' ' && cub3d->ceiling == NULL)
 		return (1);
 	return (0);
 }
-
 void check_parameter(int argc, char **argv, t_cub3d *cub3d)
 {
 	char	*tmp;
@@ -73,19 +106,24 @@ void check_parameter(int argc, char **argv, t_cub3d *cub3d)
 	fd = open(argv[1], O_RDONLY);
 	if(fd < 0)
 		ft_exit("Error opening file");
-	tmp = get_next_line(fd);
-	while(tmp != NULL)
+	while(1)
 	{
-		tmp	= get_next_line(fd);
+		tmp = get_next_line(fd);
 		if(tmp == NULL)
 			break;
-		if(is_parameter(tmp) && param_not_present(tmp, cub3d))
-			add_parameter(tmp, cub3d);
-		else
+		if(is_parameter(tmp))
 		{
-			free(tmp);
-			ft_exit("Game Parameters are not correct");
+			if(is_param_not_present(tmp, cub3d))
+				add_parameter(tmp, cub3d);
+			else
+			{
+				free(tmp);
+				ft_exit("Parameter already present");
+			}
 		}
 		free(tmp);
 	}
+	close(fd);
+	if(param_full(tmp, cub3d) < 6)
+		ft_exit("Missing parameter");
 }
